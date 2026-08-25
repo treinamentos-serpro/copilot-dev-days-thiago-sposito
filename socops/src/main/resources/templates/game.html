@@ -10,6 +10,279 @@
         /* active-state tweaks that need pseudo-class selectors */
         .tile-active:active { background-color: #f3f4f6 !important; }
         .accent-active:active { background-color: #3b82f6 !important; }
+
+        /* ── Vaporwave Sunset lobby ─────────────────────────────── */
+        #lobbyView {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--vw-sky-bottom);
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Layered sky gradient */
+        #lobbyView::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                var(--vw-sky-top)    0%,
+                var(--vw-sky-mid)   38%,
+                var(--vw-horizon)   58%,
+                var(--vw-sky-bottom) 100%
+            );
+            z-index: 0;
+        }
+
+        /* Retro sun disc */
+        .vw-sun {
+            position: absolute;
+            bottom: 36%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: clamp(140px, 32vw, 260px);
+            height: clamp(70px, 16vw, 130px);
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            background: linear-gradient(
+                180deg,
+                var(--vw-sun-top)    0%,
+                var(--vw-sun-mid)   40%,
+                var(--vw-sun-bot)  100%
+            );
+            z-index: 1;
+            box-shadow: 0 0 60px 20px rgba(255, 100, 80, 0.35);
+            /* horizontal scan-line slots cut into the sun */
+            -webkit-mask-image: repeating-linear-gradient(
+                180deg,
+                black 0px, black 10px,
+                transparent 10px, transparent 14px
+            );
+            mask-image: repeating-linear-gradient(
+                180deg,
+                black 0px, black 10px,
+                transparent 10px, transparent 14px
+            );
+        }
+
+        /* Grid horizon floor */
+        .vw-floor {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 38%;
+            z-index: 2;
+            background:
+                /* vertical lines */
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0%, transparent calc(10% - 1px),
+                    rgba(255, 0, 180, 0.4) calc(10% - 1px), rgba(255, 0, 180, 0.4) 10%
+                ),
+                /* horizontal lines (perspective-faked with spacing) */
+                repeating-linear-gradient(
+                    180deg,
+                    transparent 0px, transparent 19px,
+                    rgba(0, 240, 255, 0.35) 19px, rgba(0, 240, 255, 0.35) 20px,
+                    transparent 20px, transparent 38px,
+                    rgba(0, 240, 255, 0.25) 38px, rgba(0, 240, 255, 0.25) 39px,
+                    transparent 39px, transparent 53px,
+                    rgba(0, 240, 255, 0.18) 53px, rgba(0, 240, 255, 0.18) 54px,
+                    transparent 54px, transparent 65px,
+                    rgba(0, 240, 255, 0.12) 65px, rgba(0, 240, 255, 0.12) 66px
+                ),
+                linear-gradient(
+                    180deg,
+                    var(--vw-floor-top) 0%,
+                    var(--vw-floor-bot) 100%
+                );
+        }
+
+        /* Scanline film grain overlay */
+        #lobbyView::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.04) 0px,
+                rgba(0, 0, 0, 0.04) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Content card sits above all layers */
+        .vw-card {
+            position: relative;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            max-width: 26rem;
+            padding: 0 1.5rem;
+        }
+
+        /* Brand lockup */
+        .vw-eyebrow {
+            font-size: 0.7rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--vw-cyan);
+            opacity: 0;
+            animation: vw-slide-up 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
+            text-shadow: 0 0 10px var(--vw-cyan);
+        }
+
+        .vw-title {
+            font-size: clamp(3.5rem, 12vw, 6rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--vw-pink);
+            background: linear-gradient(
+                180deg,
+                var(--vw-title-top) 0%,
+                var(--vw-title-bot) 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* fallback for browsers without bg-clip */
+            filter: drop-shadow(0 0 18px rgba(255, 0, 180, 0.5));
+            margin: 0.25rem 0 0.1rem;
+            opacity: 0;
+            animation: vw-slide-up 0.55s cubic-bezier(0.22,1,0.36,1) 0.25s forwards;
+        }
+
+        .vw-subtitle {
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--vw-peach);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: vw-slide-up 0.5s cubic-bezier(0.22,1,0.36,1) 0.4s forwards;
+        }
+
+        /* How-to-play card */
+        .vw-rules {
+            width: 100%;
+            background: rgba(10, 5, 30, 0.65);
+            border: 1px solid rgba(255, 0, 180, 0.35);
+            border-radius: 0.625rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            opacity: 0;
+            animation: vw-fade-in 0.5s ease 0.55s forwards;
+            box-shadow: 0 0 24px rgba(0, 240, 255, 0.08);
+        }
+
+        .vw-rules h2 {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--vw-cyan);
+            margin: 0 0 0.6rem;
+            text-shadow: 0 0 8px var(--vw-cyan);
+        }
+
+        .vw-rules ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .vw-rules li {
+            font-size: 0.8rem;
+            color: rgba(220, 200, 255, 0.85);
+            padding: 0.25rem 0;
+        }
+
+        .vw-rules li::before {
+            content: '▸ ';
+            color: var(--vw-pink);
+        }
+
+        /* CTA button */
+        .vw-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #fff;
+            background: linear-gradient(135deg, var(--vw-pink) 0%, var(--vw-orange) 100%);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: vw-fade-in 0.5s ease 0.7s forwards;
+            box-shadow: 0 4px 24px rgba(255, 0, 180, 0.45), 0 0 0 1px rgba(255,255,255,0.08) inset;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+
+        .vw-cta::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0);
+            transition: background 0.15s ease;
+        }
+
+        .vw-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(255, 0, 180, 0.55), 0 0 0 1px rgba(255,255,255,0.12) inset;
+        }
+
+        .vw-cta:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 12px rgba(255, 0, 180, 0.4);
+        }
+
+        .vw-cta:focus-visible {
+            outline: 2px solid var(--vw-cyan);
+            outline-offset: 3px;
+        }
+
+        /* Entrance keyframes */
+        @keyframes vw-slide-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes vw-fade-in {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Reduced-motion: skip animations, keep styles */
+        @media (prefers-reduced-motion: reduce) {
+            .vw-eyebrow,
+            .vw-title,
+            .vw-subtitle,
+            .vw-rules,
+            .vw-cta {
+                animation: none;
+                opacity: 1;
+            }
+            .vw-cta:hover { transform: none; }
+        }
     </style>
 </head>
 <body class="h-full">
@@ -17,22 +290,28 @@
 <!-- ============================================================= -->
 <!--  LOBBY — visible before a game starts                          -->
 <!-- ============================================================= -->
-<div id="lobbyView" class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8">Social Bingo</p>
+<div id="lobbyView" aria-label="Lobby">
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3">How to play</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li>• Find people who match the questions</li>
-                <li>• Tap a square when you find a match</li>
-                <li>• Get 5 in a row to win!</li>
+    <!-- decorative layers (aria-hidden) -->
+    <div class="vw-sun"  aria-hidden="true"></div>
+    <div class="vw-floor" aria-hidden="true"></div>
+
+    <!-- content -->
+    <div class="vw-card">
+        <p class="vw-eyebrow">Edition 2025</p>
+        <h1 class="vw-title">Soc&nbsp;Ops</h1>
+        <p class="vw-subtitle">Social&nbsp;Bingo</p>
+
+        <div class="vw-rules" aria-label="How to play">
+            <h2>How to play</h2>
+            <ul>
+                <li>Find people who match the prompts</li>
+                <li>Tap a square when you find a match</li>
+                <li>Get 5 in a row to win!</li>
             </ul>
         </div>
 
-        <button onclick="launchGame()"
-                class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg accent-active transition-colors">
+        <button class="vw-cta" onclick="launchGame()">
             Start Game
         </button>
     </div>
