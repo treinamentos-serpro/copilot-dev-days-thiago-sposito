@@ -19,5 +19,6 @@
   "scm.repositories.explorer": true,
   "java.compile.nullAnalysis.mode": "automatic",
   "chat.sessionSync.enabled": true,
-  "telemetry.feedback.enabled": false
+  "telemetry.feedback.enabled": false,
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
