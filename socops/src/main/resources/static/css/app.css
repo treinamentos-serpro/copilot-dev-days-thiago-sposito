@@ -3,34 +3,6 @@
    Blazor-specific selectors (#blazor-error-ui, .blazor-error-boundary,
    .loading-progress) have been stripped out. */
 
-/* ── Vaporwave Sunset design tokens ──────────────────────────────── */
-:root {
-    /* sky gradient */
-    --vw-sky-top:    #0d0221;
-    --vw-sky-mid:    #1a0533;
-    --vw-horizon:    #c4174a;
-    --vw-sky-bottom: #ff7b42;
-
-    /* sun */
-    --vw-sun-top: #ffe066;
-    --vw-sun-mid: #ff7043;
-    --vw-sun-bot: #c4174a;
-
-    /* floor */
-    --vw-floor-top: #1a0533;
-    --vw-floor-bot: #0d0221;
-
-    /* accent palette */
-    --vw-pink:   #ff00b4;
-    --vw-cyan:   #00f0ff;
-    --vw-orange: #ff6a00;
-    --vw-peach:  #ffb085;
-
-    /* title gradient */
-    --vw-title-top: #ffe066;
-    --vw-title-bot: #ff00b4;
-}
-
 html,
 body {
     height: 100%;
