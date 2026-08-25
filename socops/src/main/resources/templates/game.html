@@ -149,7 +149,6 @@
             line-height: 0.9;
             letter-spacing: -0.02em;
             color: transparent;
-            -webkit-text-stroke: 2px var(--vw-pink);
             background: linear-gradient(
                 180deg,
                 var(--vw-title-top) 0%,
@@ -158,7 +157,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            /* fallback for browsers without bg-clip */
+            text-shadow: none;
             filter: drop-shadow(0 0 18px rgba(255, 0, 180, 0.5));
             margin: 0.25rem 0 0.1rem;
             opacity: 0;
